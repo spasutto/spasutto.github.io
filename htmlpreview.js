@@ -103,7 +103,7 @@
 	};
 
 	if (url && url.indexOf(location.hostname) < 0) {
-		if (/\b[0-9a-f]{5,40}\b/i.test(url)) {
+		if (/^\b[0-9a-f]{5,40}$\b/i.test(url)) {
 			url = `https://gist.githubusercontent.com/spasutto/${url}/raw/`;
 		}
 		fetchProxy(url, null, 0).then(loadHTML).catch(function (error) {
