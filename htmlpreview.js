@@ -102,13 +102,16 @@
 		})
 	};
 
-	if (url && url.indexOf(location.hostname) < 0)
+	if (url && url.indexOf(location.hostname) < 0) {
+		if (/\b[0-9a-f]{5,40}\b/i.test(url)) {
+			url = `https://gist.githubusercontent.com/spasutto/${url}/raw/`;
+		}
 		fetchProxy(url, null, 0).then(loadHTML).catch(function (error) {
 			console.error(error);
 			previewForm.style.display = 'block';
 			previewForm.innerText = error;
 		});
-	else
+	} else {
 		previewForm.style.display = 'block';
-
+	}
 })()
