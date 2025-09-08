@@ -56,7 +56,9 @@
 			for (i = 0; i < res.length; ++i) {
 				loadJS(res[i]);
 			}
-			document.dispatchEvent(new Event('DOMContentLoaded', {bubbles: true, cancelable: true})); //Dispatch DOMContentLoaded event after loading all scripts
+			//Dispatch load and DOMContentLoaded events after loading all scripts
+			window.dispatchEvent(new Event('load', {bubbles: true, cancelable: true}));
+			document.dispatchEvent(new Event('DOMContentLoaded', {bubbles: true, cancelable: true}));
 		});
 	};
 
