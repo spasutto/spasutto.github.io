@@ -67,7 +67,7 @@
 				document.open();
 				document.write(data);
 				document.close();
-				let triggerload = typeof document.body.onload !== 'function';
+				let triggerload = typeof window.onload !== 'function';
 				replaceAssets(triggerload);
 			}, 10); //Delay updating document to have it cleared before
 		}
