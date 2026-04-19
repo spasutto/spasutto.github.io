@@ -4,7 +4,7 @@
 
 	var url = location.search.substring(1).replace(/\/\/github\.com/, '//raw.githubusercontent.com').replace(/\/blob\//, '/'); //Get URL of the raw file
 
-	var replaceAssets = function () {
+	var replaceAssets = function (triggerload=true) {
 		var frame, a, link, links = [], script, scripts = [], i, href, src;
 		//Framesets
 		if (document.querySelectorAll('frameset').length)
@@ -57,7 +57,7 @@
 				loadJS(res[i]);
 			}
 			//Dispatch load and DOMContentLoaded events after loading all scripts
-			window.dispatchEvent(new Event('load', {bubbles: true, cancelable: true}));
+			if (triggerload) window.dispatchEvent(new Event('load', {bubbles: true, cancelable: true}));
 			document.dispatchEvent(new Event('DOMContentLoaded', {bubbles: true, cancelable: true}));
 		});
 	};
@@ -69,7 +69,8 @@
 				document.open();
 				document.write(data);
 				document.close();
-				replaceAssets();
+				let triggerload = !document.querySelector("body[onload]");
+				replaceAssets(triggerload);
 			}, 10); //Delay updating document to have it cleared before
 		}
 	};
