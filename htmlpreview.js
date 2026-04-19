@@ -1,6 +1,4 @@
 (function () {
-	
-	var previewForm = document.getElementById('previewform');
 
 	var url = location.search.substring(1).replace(/\/\/github\.com/, '//raw.githubusercontent.com').replace(/\/blob\//, '/'); //Get URL of the raw file
 
@@ -112,10 +110,6 @@
 		}
 		fetchProxy(url, null, 0).then(loadHTML).catch(function (error) {
 			console.error(error);
-			previewForm.style.display = 'block';
-			previewForm.innerText = error;
 		});
-	} else {
-		previewForm.style.display = 'block';
 	}
 })()
